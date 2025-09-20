@@ -23,29 +23,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponents();
         
         pnlContenido.setLayout(new CardLayout());
-        pnlContenido.add(new FrmProblemas(), "problemas");
+        pnlContenido.add(new FrmProblemas(), "Problemas");
         pnlContenido.add(new FmrClientes(), "Clientes");
         pnlContenido.add(new FmrActivistas(), "Activistas");
 
       
         final CardLayout cardLayout = (CardLayout) pnlContenido.getLayout();
 
-        menuClientes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(pnlContenido, "Clientes");
-            }
+        menuClientes.addActionListener((ActionEvent e) -> {
+            cardLayout.show(pnlContenido, "Clientes");
         });
-
+        menuProblemas.addActionListener((ActionEvent e) -> {
+            cardLayout.show(pnlContenido, "Problemas");
+        });
         
-        menuActivistas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(pnlContenido, "Activistas");
-            }
+        menuActivistas.addActionListener((ActionEvent e) -> {
+            cardLayout.show(pnlContenido, "Activistas");
         });
         setLocationRelativeTo(null);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

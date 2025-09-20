@@ -80,32 +80,36 @@ public class FrmProblemas extends javax.swing.JPanel {
         try {
             String descripcion = txtDesc.getText().trim();
             String estado = cmbEstado.getSelectedItem().toString().trim();
-            Date fechaInicio = (Date) txtFchInicio.getDate();
-            Date fechaFin = (Date) txtFchFin.getDate();
 
-            if (descripcion.isEmpty() || fechaFin == null || fechaInicio == null || this.cliente == null) {
+            
+            java.util.Date fechaInicioUtil = txtFchInicio.getDate();
+            java.util.Date fechaFinUtil = txtFchFin.getDate();
+
+            
+            if (descripcion.isEmpty() || fechaInicioUtil == null || this.cliente == null) {
                 JOptionPane.showMessageDialog(
                         this,
-                        "Todos los campos son obligatorios.",
+                        "La descripción, la fecha de inicio y el cliente son obligatorios.",
                         "Error",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            java.sql.Date sqlDateInicio = null;
-            java.sql.Date sqlDateFin = null;
 
-            sqlDateInicio = new java.sql.Date(fechaInicio.getTime());
-            sqlDateFin = new java.sql.Date(fechaFin.getTime());
+            java.sql.Date sqlDateInicio = new java.sql.Date(fechaInicioUtil.getTime());
+            java.sql.Date sqlDateFin = null;
+            if (fechaFinUtil != null) { 
+                sqlDateFin = new java.sql.Date(fechaFinUtil.getTime());
+            }
 
             if (btnGuardar.getText().equals("GUARDAR")) {
                 boolean exito = pController.agregarProblema(sqlDateInicio, sqlDateFin, estado, this.cliente.getIdCliente(), descripcion);
 
                 if (exito) {
-                    JOptionPane.showMessageDialog(this, "problema guardado correctemente");
+                    JOptionPane.showMessageDialog(this, "Problema guardado correctamente.");
                 } else {
                     JOptionPane.showMessageDialog(
                             this,
-                            "Ocurrio un error al guardar el problema",
+                            "Ocurrió un error al guardar el problema.",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
@@ -119,18 +123,21 @@ public class FrmProblemas extends javax.swing.JPanel {
                 } else {
                     JOptionPane.showMessageDialog(
                             this,
-                            "Ocurrio un error al actualizar los datos del problema.",
+                            "Ocurrió un error al actualizar los datos del problema.",
                             "Error",
                             JOptionPane.ERROR_MESSAGE
                     );
                 }
             }
-        } catch (Exception e) {
+
+            
             cargarProblemas();
             limpiarCampos();
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Error: " + e.getMessage(),
+                    "Error inesperado: " + e.getMessage(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -228,6 +235,11 @@ public class FrmProblemas extends javax.swing.JPanel {
 
             }
         ));
+        tblProblemas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProblemasMouseClicked(evt);
+            }
+        });
         scrlPanel.setViewportView(tblProblemas);
 
         btnFiltrar.setText("Filtrar por Cliente");
@@ -254,14 +266,6 @@ public class FrmProblemas extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblID)
-                                .addGap(74, 74, 74)
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblDesc)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblFchIni)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtFchInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -277,7 +281,15 @@ public class FrmProblemas extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                         .addComponent(txtCliente)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnClientes)))))
+                                        .addComponent(btnClientes))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblDesc)
+                                    .addComponent(lblID))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnCancelar)
@@ -398,6 +410,10 @@ public class FrmProblemas extends javax.swing.JPanel {
 
         }  // TODO add your handling code here:
     }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void tblProblemasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProblemasMouseClicked
+        cargarDatos();
+    }//GEN-LAST:event_tblProblemasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
