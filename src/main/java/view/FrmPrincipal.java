@@ -5,26 +5,46 @@
 package view;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author USER
  */
 public class FrmPrincipal extends javax.swing.JFrame {
-        private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmPrincipal.class.getName());
 
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmPrincipal.class.getName());
 
     /**
      * Creates new form FrmPrincipal
      */
     public FrmPrincipal() {
         initComponents();
-
+        
         pnlContenido.setLayout(new CardLayout());
         pnlContenido.add(new FrmProblemas(), "problemas");
         pnlContenido.add(new FmrClientes(), "Clientes");
         pnlContenido.add(new FmrActivistas(), "Activistas");
 
+      
+        final CardLayout cardLayout = (CardLayout) pnlContenido.getLayout();
+
+        menuClientes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(pnlContenido, "Clientes");
+            }
+        });
+
+        
+        menuActivistas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(pnlContenido, "Activistas");
+            }
+        });
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -60,6 +80,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        pnlContenido.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout pnlContenidoLayout = new javax.swing.GroupLayout(pnlContenido);
         pnlContenido.setLayout(pnlContenidoLayout);
         pnlContenidoLayout.setHorizontalGroup(
@@ -68,7 +90,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
         pnlContenidoLayout.setVerticalGroup(
             pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 471, Short.MAX_VALUE)
+            .addGap(0, 516, Short.MAX_VALUE)
         );
 
         jMenu1.setText("opciones");
@@ -101,9 +123,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

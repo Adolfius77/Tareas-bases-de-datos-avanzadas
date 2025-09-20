@@ -19,6 +19,13 @@ public class Activista {
     public Activista() {
     }
 
+    public Activista(int idActivista, String nombre, String telefono, Date fchIngreso) {
+        this.idActivista = idActivista;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.fchIngreso = fchIngreso;
+    }
+
     public Date getFchIngreso() {
         return fchIngreso;
     }

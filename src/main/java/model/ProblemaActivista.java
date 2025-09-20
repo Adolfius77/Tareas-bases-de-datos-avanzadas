@@ -15,6 +15,11 @@ public class ProblemaActivista {
     public ProblemaActivista() {
     }
 
+    public ProblemaActivista(int idProblema, int idActivista) {
+        this.idProblema = idProblema;
+        this.idActivista = idActivista;
+    }
+
     public int getIdProblema() {
         return idProblema;
     }

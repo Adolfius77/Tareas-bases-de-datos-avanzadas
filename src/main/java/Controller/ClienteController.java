@@ -5,6 +5,7 @@ import interfacez.IClienteDAO;
 import model.Cliente;
 
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 public class ClienteController {
     private final IClienteDAO clienteDAO;
@@ -81,6 +82,33 @@ public boolean agregarCliente(String nombre, String direccion, String telefonos)
         }
         return clienteDAO.eliminar(id_cliente);
     }
-
+    public DefaultTableModel obtenerTablaClientes() {
+        String[] columnas = {"ID", "NOMBRE", "DIRECCIÓN", "TELEFÓNO"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<Cliente> lista = clienteDAO.obtenerTodos();
+        for (Cliente c : lista) {
+            modelo.addRow(new Object[]{c.getIdCliente(), c.getNombre(), c.getDireccion(), c.getTelefonos()});
+        }
+        return modelo;
+    }
+    public DefaultTableModel obtenerTablaClientesPorFiltro(String filtro) {
+        String[] columnas = {"ID", "NOMBRE", "DIRECCIÓN", "TELEFÓNO"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<Cliente> lista = clienteDAO.obtenerTodosPorFiltro(filtro);
+        for (Cliente c : lista) {
+            modelo.addRow(new Object[]{c.getIdCliente(), c.getNombre(), c.getDireccion(), c.getTelefonos()});
+        }
+        return modelo;
+    }
+    
+    public DefaultTableModel obtenerTablaClientesPorFiltroModal(String filtro) {
+        String[] columnas = {"ID", "NOMBRE", "TELEFÓNO"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<Cliente> lista = clienteDAO.obtenerTodosPorFiltroModal(filtro);
+        for (Cliente c : lista) {
+            modelo.addRow(new Object[]{c.getIdCliente(), c.getNombre(), c.getTelefonos()});
+        }
+        return modelo;
+    }
 
 }

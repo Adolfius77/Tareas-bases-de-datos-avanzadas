@@ -17,6 +17,13 @@ public class Cliente {
     public Cliente() {
     }
 
+    public Cliente(int idCliente, String nombre, String direccion, String telefonos) {
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefonos = telefonos;
+    }
+
     public int getIdCliente() {
         return idCliente;
     }

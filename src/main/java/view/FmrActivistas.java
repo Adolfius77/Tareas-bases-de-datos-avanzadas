@@ -4,19 +4,21 @@
  */
 package view;
 
+
+
 /**
  *
  * @author USER
  */
 public class FmrActivistas extends javax.swing.JPanel {
 
-    /**
-     * Creates new form FmrActivistas
-     */
-    public FmrActivistas() {
-        initComponents();
-    }
+  
 
+    public FmrActivistas() {
+        
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,11 +32,11 @@ public class FmrActivistas extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 769, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 504, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -64,7 +64,8 @@ public class pruebas {
             // PRUEBAS PARA PROBLEMA
 
             System.out.println("\n\n--- Pruebas para los Problemas ---");
-            boolean problemaAgregado = problemaCrl.agregarProblema(Date.valueOf("2025-09-07"), null, "pendiente", idClientePrueba);
+            String descripcion = null;
+            boolean problemaAgregado = problemaCrl.agregarProblema(Date.valueOf("2025-09-07"), null, "pendiente", idClientePrueba, descripcion);
             System.out.println("Problema agregado: " + problemaAgregado);
             List<Problema> problemas = problemaCrl.listarProblema();
             problemas.forEach(System.out::println);

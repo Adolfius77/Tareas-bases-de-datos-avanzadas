@@ -18,8 +18,19 @@ public class Problema {
     private String estado;
     private String direccion;
     private int idCliente;
+    private String descripcion;
 
     public Problema() {
+    }
+
+    public Problema(int idProblema, Date fchIni, Date fchFin, String estado, String direccion, int idCliente, String descripcion) {
+        this.idProblema = idProblema;
+        this.fchIni = fchIni;
+        this.fchFin = fchFin;
+        this.estado = estado;
+        this.direccion = direccion;
+        this.idCliente = idCliente;
+        this.descripcion = descripcion;
     }
 
     public int getIdProblema() {
@@ -70,15 +81,17 @@ public class Problema {
         this.idCliente = idCliente;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     @Override
     public String toString() {
-        return "Problema{" +
-                "direccion='" + direccion + '\'' +
-                ", idProblema=" + idProblema +
-                ", fchIni=" + fchIni +
-                ", fchFin=" + fchFin +
-                ", estado='" + estado + '\'' +
-                ", idCliente=" + idCliente +
-                '}';
+        return "Problema{" + "idProblema=" + idProblema + ", fchIni=" + fchIni + ", fchFin=" + fchFin + ", estado=" + estado + ", direccion=" + direccion + ", idCliente=" + idCliente + ", descripcion=" + descripcion + '}';
     }
+
 }
