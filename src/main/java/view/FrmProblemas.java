@@ -55,14 +55,40 @@ public class FrmProblemas extends javax.swing.JPanel {
     private void cargarDatos() {
         int fila = tblProblemas.getSelectedRow();
         if (fila >= 0) {
-            String id = tblProblemas.getValueAt(fila, 0).toString();
-            txtID.setText(id);
-            txtDesc.setText(tblProblemas.getValueAt(fila, 1).toString());
-            cmbEstado.setSelectedItem(tblProblemas.getValueAt(fila, 2));
-            txtFchInicio.setDate((java.util.Date) tblProblemas.getValueAt(fila, 3));
-            txtFchFin.setDate((java.util.Date) tblProblemas.getValueAt(fila, 4));
-            this.cliente = clController.obtenerCliente(Integer.parseInt(id));
-            txtCliente.setText(this.cliente.getNombre());
+
+            Object idObj = tblProblemas.getValueAt(fila, 0);
+            Object descObj = tblProblemas.getValueAt(fila, 1);
+            Object estadoObj = tblProblemas.getValueAt(fila, 2);
+            Object fchIniObj = tblProblemas.getValueAt(fila, 3);
+            Object fchFinObj = tblProblemas.getValueAt(fila, 4);
+
+            String idStr = (idObj == null) ? "" : idObj.toString();
+            String descStr = (descObj == null) ? "" : descObj.toString();
+
+            txtID.setText(idStr);
+            txtDesc.setText(descStr);
+
+            cmbEstado.setSelectedItem(estadoObj);
+            txtFchInicio.setDate((java.util.Date) fchIniObj);
+            txtFchFin.setDate((java.util.Date) fchFinObj);
+
+            if (!idStr.isEmpty()) {
+                int problemaId = Integer.parseInt(idStr);
+
+                model.Problema problemaSeleccionado = pController.obtenerProblema(problemaId);
+
+                if (problemaSeleccionado != null) {
+                    this.cliente = clController.obtenerCliente(problemaSeleccionado.getIdCliente());
+                    if (this.cliente != null) {
+                        txtCliente.setText(this.cliente.getNombre());
+                    } else {
+                        txtCliente.setText("Cliente no encontrado");
+                    }
+                }
+            } else {
+                txtCliente.setText("");
+            }
+
             btnGuardar.setText("ACTUALIZAR");
         }
     }
@@ -81,11 +107,9 @@ public class FrmProblemas extends javax.swing.JPanel {
             String descripcion = txtDesc.getText().trim();
             String estado = cmbEstado.getSelectedItem().toString().trim();
 
-            
             java.util.Date fechaInicioUtil = txtFchInicio.getDate();
             java.util.Date fechaFinUtil = txtFchFin.getDate();
 
-            
             if (descripcion.isEmpty() || fechaInicioUtil == null || this.cliente == null) {
                 JOptionPane.showMessageDialog(
                         this,
@@ -97,7 +121,7 @@ public class FrmProblemas extends javax.swing.JPanel {
 
             java.sql.Date sqlDateInicio = new java.sql.Date(fechaInicioUtil.getTime());
             java.sql.Date sqlDateFin = null;
-            if (fechaFinUtil != null) { 
+            if (fechaFinUtil != null) {
                 sqlDateFin = new java.sql.Date(fechaFinUtil.getTime());
             }
 
@@ -130,7 +154,6 @@ public class FrmProblemas extends javax.swing.JPanel {
                 }
             }
 
-            
             cargarProblemas();
             limpiarCampos();
 

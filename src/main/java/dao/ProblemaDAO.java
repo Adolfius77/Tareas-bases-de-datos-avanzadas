@@ -29,6 +29,7 @@ public class ProblemaDAO implements IProblemaDAO{
             ps.setDate(2, problema.getFchFin());
             ps.setString(3, problema.getEstado());
             ps.setInt(4, problema.getIdCliente());
+            ps.setString(5, problema.getDescripcion());
             
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -53,6 +54,7 @@ public class ProblemaDAO implements IProblemaDAO{
                 problema.setFchFin(rs.getDate("fch_fin"));
                 problema.setEstado(rs.getString("estado"));
                 problema.setIdCliente(rs.getInt("idCliente"));
+                problema.setDescripcion(rs.getString("descripcion"));
                 lista.add(problema);
             }
         } catch (SQLException e) {
@@ -73,6 +75,7 @@ public class ProblemaDAO implements IProblemaDAO{
             ps.setString(3, problema.getEstado());
             ps.setInt(4, problema.getIdCliente());
             ps.setInt(5, problema.getIdProblema());
+            ps.setString(6, problema.getDescripcion());
             
             return ps.executeUpdate() > 0;
             
@@ -114,6 +117,7 @@ public class ProblemaDAO implements IProblemaDAO{
                 problema.setFchFin(rs.getDate("fch_fin"));
                 problema.setEstado(rs.getString("estado"));
                 problema.setIdCliente(rs.getInt("idCliente"));
+                problema.setDescripcion(rs.getString("descripcion"));
             }
 
         } catch (SQLException e) {

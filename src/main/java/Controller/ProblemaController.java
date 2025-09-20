@@ -36,6 +36,7 @@ public class ProblemaController {
         problema.setFchFin(fchFin);
         problema.setEstado(estado);
         problema.setIdCliente(idCliente);
+        problema.setDescripcion(descripcion);
 
         return problemaDAO.insertar(problema);
     }
@@ -70,10 +71,12 @@ public class ProblemaController {
             return false;
         }
         Problema problema = new Problema();
+        problema.setIdProblema(idProblema);
         problema.setFchIni(fchIni);
         problema.setFchFin(fchFin);
         problema.setEstado(estado);
         problema.setIdCliente(idCliente);
+        problema.setDescripcion(descripcion);
         return problemaDAO.actualizar(problema);
 
     }
