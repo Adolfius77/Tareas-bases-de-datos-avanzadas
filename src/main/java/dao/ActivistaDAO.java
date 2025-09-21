@@ -117,7 +117,7 @@ public class ActivistaDAO implements IActivistaDAO{
     }
     @Override
     public List<Activista> obtenerTodosPorFiltroModal(String filtro) {
-        String sql = "SELECT idActivista, nombre, telefono, fchIngreso  FROM activista WHERE nombre LIKE ? OR telefono LIKE ? OR fchIngreso LIKE ?  LIMIT 100";
+        String sql = "SELECT idActivista, nombre, telefono, fchIngreso FROM Activista WHERE nombre LIKE ? OR telefono LIKE ? LIMIT 100";
         List<Activista> lista = new ArrayList<>();
 
         try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {

@@ -17,20 +17,23 @@ public class FmrActivistas extends javax.swing.JPanel {
     private ActivistaController activistaController;
 
     public FmrActivistas() {
+        initComponents();
         activistaController = new ActivistaController();
         cargarActivistas();
         btnEliminar.setVisible(false);
     }
 
     private void limpiarCampos() {
-        txtIDActivista.setText("");
+         txtIDActivista.setText("");
         txtNombre.setText("");
         txtTelefono.setText("");
         txtFchFin.setDate(null);
+        btnGuardar.setText("GUARDAR");
+        btnEliminar.setVisible(false);
     }
 
     private void cargarActivistas() {
-        tablaActivistas.setModel(activistaController.obtenerTablaProblemas());
+        tablaActivistas.setModel(activistaController.obtenerTablaActivistas());
     }
 
     private void guardarActivista() {
@@ -57,7 +60,7 @@ public class FmrActivistas extends javax.swing.JPanel {
             } else {
                 int id = Integer.parseInt(txtIDActivista.getText());
 
-                boolean exito = activistaController.actualizarActivista(FRAMEBITS, nombre, telefono, sqlDateIngreso);
+                boolean exito = activistaController.actualizarActivista(id, nombre, telefono, sqlDateIngreso);
                 if (exito) {
                     JOptionPane.showMessageDialog(this, "activista actualizado correctamente");
 
@@ -79,22 +82,15 @@ public class FmrActivistas extends javax.swing.JPanel {
 
     private void cargarDatos() {
         int fila = tablaActivistas.getSelectedRow();
-
-        Object idObject = tablaActivistas.getValueAt(fila, 0);
-        Object descObj = tablaActivistas.getValueAt(fila, 1);
-        Object estadoObj = tablaActivistas.getValueAt(fila, 2);
-        Object fchIniObj = tablaActivistas.getValueAt(fila, 3);
-
         if (fila >= 0) {
+            
             txtIDActivista.setText(tablaActivistas.getValueAt(fila, 0).toString());
             txtNombre.setText(tablaActivistas.getValueAt(fila, 1).toString());
-            txtTelefono.setText(tablaActivistas.getValueAt(fila, 0).toString());
-
-            txtFchFin.setDate((java.util.Date) fchIniObj);
+            txtTelefono.setText(tablaActivistas.getValueAt(fila, 2).toString());
+            txtFchFin.setDate((java.util.Date) tablaActivistas.getValueAt(fila, 3));
 
             btnGuardar.setText("ACTUALIZAR");
             btnEliminar.setVisible(true);
-
         }
     }
 
@@ -131,11 +127,11 @@ public class FmrActivistas extends javax.swing.JPanel {
     }
 
     private void buscar() {
-        String nombre = txtBuscar.getText().trim();
-        if (nombre.isEmpty()) {
+        String filtro = txtBuscar.getText().trim();
+        if (filtro.isEmpty()) {
             cargarActivistas();
         } else {
-            tablaActivistas.setModel(activistaController.obtenerTablaClientesPorFiltroModal(nombre));
+            tablaActivistas.setModel(activistaController.obtenerTablaClientesPorFiltroModal(filtro));
         }
     }
 

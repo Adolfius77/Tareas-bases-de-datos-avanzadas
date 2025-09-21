@@ -83,7 +83,7 @@ public class ActivistaController {
         }
         return activistaDAO.eliminar(idActivista);
     }
-    public DefaultTableModel obtenerTablaProblemas() {
+    public DefaultTableModel obtenerTablaActivistas() {
         String[] columnas = {"ID", "NOMBRE", "TELEFONO", "FECHA INGRESO"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         List<Activista> lista = activistaDAO.obtenerTodos();
