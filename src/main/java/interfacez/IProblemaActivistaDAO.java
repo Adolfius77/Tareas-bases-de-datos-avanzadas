@@ -1,6 +1,8 @@
 package interfacez;
 
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Problema;
 import model.ProblemaActivista;
 
 /*
@@ -17,4 +19,7 @@ public interface IProblemaActivistaDAO {
     List<ProblemaActivista> obtenerPorProblema(int idProblema);
     List<ProblemaActivista> obtenerPorActivista(int idActivista);
     boolean eliminar(int idProblema, int idActivista);
+    public List<ProblemaActivista> obtenerTodos(DefaultTableModel modelo);
+    List<ProblemaActivista> obtenerTodosPorFiltro(String filtro);
+
 }

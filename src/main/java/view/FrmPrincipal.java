@@ -26,6 +26,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlContenido.add(new FrmProblemas(), "Problemas");
         pnlContenido.add(new FmrClientes(), "Clientes");
         pnlContenido.add(new FmrActivistas(), "Activistas");
+        pnlContenido.add(new FrmProblemasActivistas(), "Problema Activistas");
 
       
         final CardLayout cardLayout = (CardLayout) pnlContenido.getLayout();
@@ -36,6 +37,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuProblemas.addActionListener((ActionEvent e) -> {
             cardLayout.show(pnlContenido, "Problemas");
         });
+        menuProblemasActivistas.addActionListener((ActionEvent e) -> {
+            cardLayout.show(pnlContenido, "Problema Activistas");
+        });
         
         menuActivistas.addActionListener((ActionEvent e) -> {
             cardLayout.show(pnlContenido, "Activistas");
@@ -44,6 +48,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
     
 
+   
     /**  
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,6 +66,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuClientes = new javax.swing.JMenuItem();
         menuActivistas = new javax.swing.JMenuItem();
         menuProblemas = new javax.swing.JMenuItem();
+        menuProblemasActivistas = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,6 +116,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(menuProblemas);
+
+        menuProblemasActivistas.setText("Problema Activistas");
+        jMenu1.add(menuProblemasActivistas);
 
         jMenuBar1.add(jMenu1);
 
@@ -182,6 +191,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuActivistas;
     private javax.swing.JMenuItem menuClientes;
     private javax.swing.JMenuItem menuProblemas;
+    private javax.swing.JMenuItem menuProblemasActivistas;
     private javax.swing.JPanel pnlContenido;
     // End of variables declaration//GEN-END:variables
 }
