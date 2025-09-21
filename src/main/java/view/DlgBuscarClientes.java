@@ -176,7 +176,8 @@ public class DlgBuscarClientes extends javax.swing.JDialog {
     public Integer getClienteSeleccionado() {
         int fila = tblClientes.getSelectedRow();
         if (fila >= 0) {
-            return (Integer) tblClientes.getValueAt(fila, 0); // columna 0 = id
+            String idStr = tblClientes.getValueAt(fila, 0).toString();
+            return Integer.valueOf(idStr);
         }
         return null;
     }

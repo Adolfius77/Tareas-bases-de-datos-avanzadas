@@ -6,6 +6,9 @@ import model.Activista;
 
 import java.sql.Date;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Cliente;
+import model.Problema;
 
 public class ActivistaController {
 
@@ -79,5 +82,23 @@ public class ActivistaController {
             return false;
         }
         return activistaDAO.eliminar(idActivista);
+    }
+    public DefaultTableModel obtenerTablaProblemas() {
+        String[] columnas = {"ID", "NOMBRE", "TELEFONO", "FECHA INGRESO"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<Activista> lista = activistaDAO.obtenerTodos();
+        for (Activista c : lista) {
+            modelo.addRow(new Object[]{c.getIdActivista(), c.getNombre(), c.getTelefono(), c.getFchIngreso()});
+        }
+        return modelo;
+    }
+    public DefaultTableModel obtenerTablaClientesPorFiltroModal(String filtro) {
+        String[] columnas = {"ID", "NOMBRE", "TELEFÓNO","FECHA INGRESO"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<Activista> lista = activistaDAO.obtenerTodosPorFiltroModal(filtro);
+        for (Activista c : lista) {
+            modelo.addRow(new Object[]{c.getIdActivista(), c.getNombre(), c.getTelefono(), c.getFchIngreso()});
+        }
+        return modelo;
     }
 }

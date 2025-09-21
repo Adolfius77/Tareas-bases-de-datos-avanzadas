@@ -401,11 +401,11 @@ public class FrmProblemas extends javax.swing.JPanel {
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        DlgBuscarClientes dlg = new DlgBuscarClientes(frame, true); // modal
+        DlgBuscarClientes dlg = new DlgBuscarClientes(frame, true); 
         dlg.setLocationRelativeTo(this);
-        dlg.setVisible(true); // esto bloquea hasta cerrar el diálogo
+        dlg.setVisible(true);
 
-        // Después de cerrar, obtener el cliente seleccionado
+        
         Integer idCliente = dlg.getClienteSeleccionado();
         if (idCliente != null) {
             this.cliente = clController.obtenerCliente(idCliente);

@@ -18,19 +18,18 @@ import model.Problema;
  *
  * @author USER
  */
-public class ProblemaDAO implements IProblemaDAO{
+public class ProblemaDAO implements IProblemaDAO {
 
     @Override
     public boolean insertar(Problema problema) {
-        String sql = "INSERT INTO Problema (fch_ini, fch_fin, estado, idCliente) VALUES (? , ?, ?, ?)";
-        try(Connection conn = ConexionDB.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+        String sql = "INSERT INTO Problema (fch_ini, fch_fin, estado, idCliente, descripcion) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setDate(1, problema.getFchIni());
             ps.setDate(2, problema.getFchFin());
             ps.setString(3, problema.getEstado());
             ps.setInt(4, problema.getIdCliente());
             ps.setString(5, problema.getDescripcion());
-            
+
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("error al insertar problema: " + e.getMessage());
@@ -42,12 +41,11 @@ public class ProblemaDAO implements IProblemaDAO{
     public List<Problema> obtenerTodos() {
         String sql = "SELECT * FROM Problema ";
         List<Problema> lista = new ArrayList<>();
-        
-        try(Connection conn = ConexionDB.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Problema problema = new Problema();
                 problema.setIdProblema(rs.getInt("idProblema"));
                 problema.setFchIni(rs.getDate("fch_ini"));
@@ -60,57 +58,53 @@ public class ProblemaDAO implements IProblemaDAO{
         } catch (SQLException e) {
             System.err.println("error al obtener todos lo problemas: " + e.getMessage());
         }
-        return  lista;
+        return lista;
     }
-
-
 
     @Override
     public boolean actualizar(Problema problema) {
-        String sql = "UPDATE Problema SET fch_ini  = ?, fch_fin = ?, estado = ?, idCliente = ? WHERE idProblema = ?";
-        try(Connection conn = ConexionDB.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)){
+        String sql = "UPDATE Problema SET fch_ini = ?, fch_fin = ?, estado = ?, idCliente = ?, descripcion = ? WHERE idProblema = ?";
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setDate(1, problema.getFchIni());
             ps.setDate(2, problema.getFchFin());
             ps.setString(3, problema.getEstado());
             ps.setInt(4, problema.getIdCliente());
-            ps.setInt(5, problema.getIdProblema());
-            ps.setString(6, problema.getDescripcion());
-            
+            ps.setString(5, problema.getDescripcion()); 
+            ps.setInt(6, problema.getIdProblema());
+
             return ps.executeUpdate() > 0;
-            
+
         } catch (SQLException e) {
-            System.err.println("error al actualizar el problema: "+ e.getMessage());
+            System.err.println("error al actualizar el problema: " + e.getMessage());
             return false;
         }
-  
+
     }
 
     @Override
     public boolean eliminar(int idProblema) {
         String sql = "DELETE FROM Problema WHERE idProblema = ?";
-        try(Connection conn = ConexionDB.getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idProblema);
             return ps.executeUpdate() > 0;
-            
+
         } catch (SQLException e) {
             System.err.println("Errror al eliminar el problema: " + e.getMessage());
             return false;
         }
     }
+
     @Override
     public Problema obtenerPorId(int idProblema) {
         String sql = "SELECT * FROM Problema WHERE idProblema = ?";
         Problema problema = null;
 
-        try(Connection conn = ConexionDB.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, idProblema);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 problema = new Problema();
                 problema.setIdProblema(rs.getInt("idProblema"));
                 problema.setFchIni(rs.getDate("fch_ini"));
@@ -125,5 +119,5 @@ public class ProblemaDAO implements IProblemaDAO{
         }
         return problema;
     }
-    
+
 }

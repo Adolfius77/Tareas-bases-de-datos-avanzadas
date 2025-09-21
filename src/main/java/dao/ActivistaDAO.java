@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Activista;
+import model.Cliente;
 
 /**
  *
@@ -114,5 +115,30 @@ public class ActivistaDAO implements IActivistaDAO{
             System.err.println("error al eliminar al activista: " + e.getMessage());
         }   return false;
     }
-    
+    @Override
+    public List<Activista> obtenerTodosPorFiltroModal(String filtro) {
+        String sql = "SELECT idActivista, nombre, telefono, fchIngreso  FROM activista WHERE nombre LIKE ? OR telefono LIKE ? OR fchIngreso LIKE ?  LIMIT 100";
+        List<Activista> lista = new ArrayList<>();
+
+        try (Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + filtro + "%");
+            ps.setString(2, "%" + filtro + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Activista activista = new Activista();
+                activista.setIdActivista(rs.getInt("idActivista"));
+                activista.setNombre(rs.getString("nombre"));
+                activista.setTelefono(rs.getString("telefono"));
+                activista.setFchIngreso(rs.getDate("fchIngreso"));
+                lista.add(activista);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al obtener activistas por filtro: " + e.getMessage());
+        }
+
+        return lista;
+    }
 }
