@@ -96,7 +96,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGap(0, 516, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("opciones");
+        jMenu1.setText("menu");
 
         menuClientes.setText("Clientes");
         jMenu1.add(menuClientes);

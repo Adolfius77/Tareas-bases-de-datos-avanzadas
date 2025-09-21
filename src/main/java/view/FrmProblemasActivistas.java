@@ -21,6 +21,7 @@ public class FrmProblemasActivistas extends javax.swing.JPanel {
     public FrmProblemasActivistas() {
         initComponents();
         problemaActivistaController = new ProblemaActivistaController();
+        cargarDatos();
 
     }
 
