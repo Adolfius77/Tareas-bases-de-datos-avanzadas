@@ -19,7 +19,7 @@ public interface IProblemaActivistaDAO {
     List<ProblemaActivista> obtenerPorProblema(int idProblema);
     List<ProblemaActivista> obtenerPorActivista(int idActivista);
     boolean eliminar(int idProblema, int idActivista);
-    public List<ProblemaActivista> obtenerTodos(DefaultTableModel modelo);
+    public List<ProblemaActivista> obtenerTodos();
     List<ProblemaActivista> obtenerTodosPorFiltro(String filtro);
 
 }

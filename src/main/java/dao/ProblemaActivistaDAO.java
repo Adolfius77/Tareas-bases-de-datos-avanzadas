@@ -95,7 +95,7 @@ public class ProblemaActivistaDAO implements IProblemaActivistaDAO {
     }
 
     @Override
-    public List<ProblemaActivista> obtenerTodos(DefaultTableModel modelo) {
+    public List<ProblemaActivista> obtenerTodos() {
         String sql = "SELECT * FROM Problema_Activista ";
         List<ProblemaActivista> lista = new ArrayList<>();
 
@@ -105,7 +105,7 @@ public class ProblemaActivistaDAO implements IProblemaActivistaDAO {
             while (rs.next()) {
                 ProblemaActivista problemaActivista = new ProblemaActivista();
                 problemaActivista.setIdProblema(rs.getInt("idProblema"));
-                problemaActivista.setIdActivista(rs.getInt("problemaActivista"));
+                problemaActivista.setIdActivista(rs.getInt("idActivista"));
 
                 lista.add(problemaActivista);
             }

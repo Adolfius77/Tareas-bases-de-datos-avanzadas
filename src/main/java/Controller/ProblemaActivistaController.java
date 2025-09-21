@@ -55,9 +55,9 @@ public class ProblemaActivistaController {
     public DefaultTableModel obtenerTablaActivistasProblemas() {
         String[] columnas = {"ID ACTIVISTA", "ID PROBLEMA"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
-        List<ProblemaActivista> lista = problemaActivistaDAO.obtenerTodos(modelo);
+        List<ProblemaActivista> lista = problemaActivistaDAO.obtenerTodos();
         for (ProblemaActivista c : lista) {
-            modelo.addRow(new Object[]{c.getIdActivista(), c.getIdActivista(), c.getIdProblema()});
+            modelo.addRow(new Object[]{c.getIdProblema(), c.getIdActivista()});
         }
         return modelo;
     }
@@ -66,13 +66,12 @@ public class ProblemaActivistaController {
         String[] columnas = {"ID Problema", "Problema", "ID Activista", "Activista"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
 
-        
         List<ProblemaActivista> lista = problemaActivistaDAO.obtenerTodosPorFiltro(filtro);
 
         for (ProblemaActivista pa : lista) {
-            
-            String nombreProblema = "Descripción del problema " + pa.getIdProblema(); 
-            String nombreActivista = "Nombre del activista " + pa.getIdActivista(); 
+
+            String nombreProblema = "Descripción del problema " + pa.getIdProblema();
+            String nombreActivista = "Nombre del activista " + pa.getIdActivista();
 
             modelo.addRow(new Object[]{
                 pa.getIdProblema(),
